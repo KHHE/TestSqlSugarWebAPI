@@ -17,7 +17,7 @@ namespace Entity
         [SugarColumn(InsertSql = "getdate()")] //生成   getdate()
         public DateTime UpdateTime { get; set; }
 
-        [SugarColumn(InsertSql = "1")] //生成   getdate()
+        [SugarColumn(InsertSql = "1")] //生成   1
         public int Vertion { get; set; }
 
         public void Modify()

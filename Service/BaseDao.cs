@@ -88,12 +88,12 @@ namespace Service
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="expression"></param>
-        /// <param name="pageIndex"></param>
+        /// <param name="pageIdx"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async ValueTask<List<T>> GetPageList<T>(Expression<Func<T, bool>> expression, int pageIndex, int pageSize) where T : BaseEntity, new()
+        public async ValueTask<List<T>> GetPageList<T>(Expression<Func<T, bool>> expression, int pageIdx, int pageSize) where T : BaseEntity, new()
         {
-            return await db.Queryable<T>().Where(expression).ToPageListAsync(pageIndex, pageSize);
+            return await db.Queryable<T>().Where(expression).ToPageListAsync(pageIdx, pageSize);
         }
     }
 }

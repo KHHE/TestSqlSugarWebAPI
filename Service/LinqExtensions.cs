@@ -6,37 +6,19 @@ using System.Linq.Expressions;
 namespace Dal
 {
     /// <summary>
-    /// 表达式操作符And、Or
+    /// 表达式操作符And、Or,，条件查询拼接后查询数据库
     /// </summary>
     public static class LinqExtensions
     {
-        public static Expression Property(this Expression expression, string propertyName)
-        {
-            return Expression.Property(expression, propertyName);
-        }
-        public static Expression AndAlso(this Expression left, Expression right)
-        {
-            return Expression.AndAlso(left, right);
-        }
-        public static Expression Call(this Expression instance, string methodName, params Expression[] arguments)
-        {
-            return Expression.Call(instance, instance.Type.GetMethod(methodName), arguments);
-        }
-        public static Expression GreaterThan(this Expression left, Expression right)
-        {
-            return Expression.GreaterThan(left, right);
-        }
-        public static Expression<T> ToLambda<T>(this Expression body, params ParameterExpression[] parameters)
-        {
-            return Expression.Lambda<T>(body, parameters);
-        }
-
+        /// <summary>
+        /// 获取数据库条件对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static Expression<Func<T, bool>> True<T>() { return param => true; }
 
-        public static Expression<Func<T, bool>> False<T>() { return param => false; }
-
         /// <summary>
-        /// 组合And
+        /// 条件对象组合And
         /// </summary>
         /// <returns></returns>
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
@@ -44,7 +26,7 @@ namespace Dal
             return first.Compose(second, Expression.AndAlso);
         }
         /// <summary>
-        /// 组合Or
+        /// 条件对象组合Or
         /// </summary>
         /// <returns></returns>
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
@@ -53,7 +35,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// Combines the first expression with the second using the specified merge function.
+        /// 操作符组合
         /// </summary>
         static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second, Func<Expression, Expression, Expression> merge)
         {

@@ -87,8 +87,8 @@ namespace TestSqlSugarWebAPI.Controllers
         {
             var expression = LinqExtensions.True<Factory>();
             expression = expression.And(x => x.Name.Contains(dto.Name));
+            expression = expression.Or(x => x.Addr.Contains(dto.Addr));
             return await factoryLogic.GetPageList(expression, pageIndex, pageSize);
         }
-
     }
 }
