@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestSqlSugarWebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:TestSqlSugarWebAPI.Controllers.BaseController">
+            <summary>
+            控制器访问拦截器
+            </summary>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.BaseController.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            接口执行前执行
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            接口执行后执行
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:TestSqlSugarWebAPI.Controllers.FactoryController">
+            <summary>
+            工厂控制器
+            </summary>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.#ctor(SqlSugar.ISqlSugarClient)">
+            <summary>
+            构造函数注入服务
+            </summary>
+            <param name="sqlSugarClient"></param>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.GetEntity(System.Int32)">
+            <summary>
+            实现获取功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.SaveEntity(Entity.Factory)">
+            <summary>
+            实现新增功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.DeleteEntity(System.Int32)">
+            <summary>
+            实现删除功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.UpdateEntity(Entity.Factory)">
+            <summary>
+            实现更新功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.GetList(Entity.FactoryDTO)">
+            <summary>
+            实现List功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.GetPageList(Entity.FactoryDTO,System.Int32,System.Int32)">
+            <summary>
+            实现分页功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Startup.CreateCodeFirstTable(SqlSugar.SqlSugarClient)">
+            <summary>
+            自动根据实体类创建表
+            </summary>
+            <param name="db"></param>
+        </member>
+    </members>
+</doc>
