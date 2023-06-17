@@ -7,10 +7,10 @@ using Entity;
 
 namespace Service
 {
-    public class BaseDao
+    public class BaseRepository
     {
         private readonly ISqlSugarClient db;
-        public BaseDao(ISqlSugarClient sqlSugarClient)
+        public BaseRepository(ISqlSugarClient sqlSugarClient)
         {
             db = sqlSugarClient;
         }

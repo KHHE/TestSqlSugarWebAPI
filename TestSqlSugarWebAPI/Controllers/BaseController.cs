@@ -10,7 +10,7 @@ namespace TestSqlSugarWebAPI.Controllers
     public class BaseController : Controller
     {
         /// <summary>
-        /// 接口执行前执行
+        /// 接口执行前执行拦截功能，如记录日志、判断权限等
         /// </summary>
         /// <param name="context"></param>
         /// <param name="next"></param>
@@ -38,6 +38,7 @@ namespace TestSqlSugarWebAPI.Controllers
             }
             #endregion
         }
+
         /// <summary>
         /// 接口执行后执行
         /// </summary>

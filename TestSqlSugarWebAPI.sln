@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSqlSugarWebAPI", "TestSqlSugarWebAPI\TestSqlSugarWebAPI.csproj", "{44D3C4F8-00B0-4FF8-86F7-D8C39722E552}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSqlSugarWebAPI", "TestSqlSugarWebAPI\TestSqlSugarWebAPI.csproj", "{44D3C4F8-00B0-4FF8-86F7-D8C39722E552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "TestEntitys\Entity.csproj", "{7128F52E-26E1-49CE-BD93-B8A1AFEAD2FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "TestEntitys\Entity.csproj", "{7128F52E-26E1-49CE-BD93-B8A1AFEAD2FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{4F00C7FA-6495-44A2-8116-5B13BF5152E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "Interface\Interface.csproj", "{4F00C7FA-6495-44A2-8116-5B13BF5152E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "Service\Dal.csproj", "{436658B3-4AB7-4437-9606-4995F740DED7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "Service\Dal.csproj", "{436658B3-4AB7-4437-9606-4995F740DED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoudleCreateCode", "MoudleCreateCode\MoudleCreateCode.csproj", "{7864D5A4-1196-4A27-9870-9EE62E8E67A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{436658B3-4AB7-4437-9606-4995F740DED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{436658B3-4AB7-4437-9606-4995F740DED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{436658B3-4AB7-4437-9606-4995F740DED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

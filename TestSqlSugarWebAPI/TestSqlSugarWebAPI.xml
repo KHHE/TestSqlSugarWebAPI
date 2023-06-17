@@ -70,6 +70,29 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:TestSqlSugarWebAPI.Controllers.ToolController">
+            <summary>
+            工厂控制器
+            </summary>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.#ctor(SqlSugar.ISqlSugarClient,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数注入服务
+            </summary>
+            <param name="sqlSugarClient"></param>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.GetTableFieldList(System.String)">
+            <summary>
+            实现获取功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.GetSection">
+            <summary>
+            实现获取功能
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:TestSqlSugarWebAPI.Startup.CreateCodeFirstTable(SqlSugar.SqlSugarClient)">
             <summary>
             自动根据实体类创建表

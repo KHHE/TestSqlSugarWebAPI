@@ -10,40 +10,40 @@ namespace Interface
 {
     public class FactoryLogic : IFactoryLogic
     {
-        private readonly BaseDao baseDao;
+        private readonly BaseRepository baseRepo;
         public FactoryLogic(ISqlSugarClient sqlSugarClient)
         {
-            baseDao = new BaseDao(sqlSugarClient);
+            baseRepo = new BaseRepository(sqlSugarClient);
         }
 
         public ValueTask<int> SaveEntity(Factory entity)
         {
-            return baseDao.SaveEntity<Factory>(entity);
+            return baseRepo.SaveEntity<Factory>(entity);
         }
 
         public ValueTask<int> UpdateEntity(Factory entity)
         {
-            return baseDao.UpdateEntity<Factory>(entity);
+            return baseRepo.UpdateEntity<Factory>(entity);
         }
 
         public ValueTask<int> DeleteEntity(int id)
         {
-            return baseDao.DeleteEntity<Factory>(id);
+            return baseRepo.DeleteEntity<Factory>(id);
         }
 
         public ValueTask<Factory> GetEntity(int id)
         {
-            return baseDao.GetEntity<Factory>(id);
+            return baseRepo.GetEntity<Factory>(id);
         }
 
         public ValueTask<List<Factory>> GetList(Expression<Func<Factory, bool>> expression)
         {
-            return baseDao.GetList(expression);
+            return baseRepo.GetList(expression);
         }
 
         public ValueTask<List<Factory>> GetPageList(Expression<Func<Factory, bool>> expression, int pageIndex, int pageSize)
         {
-            return baseDao.GetPageList(expression, pageIndex, pageSize);
+            return baseRepo.GetPageList(expression, pageIndex, pageSize);
         }
     }
 }
