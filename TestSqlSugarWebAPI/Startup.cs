@@ -36,13 +36,13 @@ namespace TestSqlSugarWebAPI
                 c.IncludeXmlComments("TestSqlSugarWebAPI.xml", true);
             });
 
-            //添加认证处理器
+            //添加WebApi访问认证处理控制中心
             services.AddAuthentication(options =>  
             {
-                //options.DefaultScheme = DefaultAuthHandler.SchemeName;//不要指定默认授权方案，否则所有请求都会进行验证
+                options.DefaultScheme = ApiAuthorizeHandler.SCHEME_NAME;//指定默认授权方案，所有请求都会进行验证
                 options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SCHEME_NAME, "DEFAULT_SCHEME");
-                options.DefaultAuthenticateScheme = ApiAuthorizeHandler.SCHEME_NAME;
-                options.DefaultChallengeScheme = ApiAuthorizeHandler.SCHEME_NAME;
+                //options.DefaultAuthenticateScheme = ApiAuthorizeHandler.SCHEME_NAME;
+                //options.DefaultChallengeScheme = ApiAuthorizeHandler.SCHEME_NAME;
             });
 
             //添加数据库SqlSugar
@@ -84,6 +84,7 @@ namespace TestSqlSugarWebAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => {
+                    //添加WebApi访问密钥，不携带密钥无法访问成功，请求头添加：swagger字段，密钥：定义的AUTH_KEY
                     c.UseRequestInterceptor($@"(req) => {{ req.headers['swagger']='{ApiAuthorizeHandler.AUTH_KEY}';return req;}}");
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSqlSugarWebAPI v1");
                 });
@@ -93,8 +94,8 @@ namespace TestSqlSugarWebAPI
 
             app.UseRouting();
 
-            app.UseAuthentication();    //认证
-            app.UseAuthorization();     //授权
+            app.UseAuthentication();    //添加WebApi访问认证
+            app.UseAuthorization();     //添加WebApi访问授权
 
             app.UseEndpoints(endpoints =>
             {

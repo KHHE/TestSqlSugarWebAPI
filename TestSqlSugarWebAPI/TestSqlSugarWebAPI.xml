@@ -4,6 +4,21 @@
         <name>TestSqlSugarWebAPI</name>
     </assembly>
     <members>
+        <member name="T:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler">
+            <summary>
+            WebApi权限认证控制器
+            </summary>
+        </member>
+        <member name="F:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.SCHEME_NAME">
+            <summary>
+            权限认证类型
+            </summary>
+        </member>
+        <member name="F:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.AUTH_KEY">
+            <summary>
+            身份认证密钥
+            </summary>
+        </member>
         <member name="T:TestSqlSugarWebAPI.Controllers.BaseController">
             <summary>
             控制器访问拦截器
