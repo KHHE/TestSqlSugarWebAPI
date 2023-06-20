@@ -90,7 +90,7 @@
         <member name="T:TestSqlSugarWebAPI.Filter.GlobalExceptionFilter">
             <summary>
             全局异常过滤器
-            </summary>
+            </summary> 
         </member>
         <member name="M:TestSqlSugarWebAPI.Filter.GlobalExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
             <summary>

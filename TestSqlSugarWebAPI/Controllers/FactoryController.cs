@@ -1,8 +1,8 @@
 ﻿using Dal;
 using Entity;
 using Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SqlSugar;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ namespace TestSqlSugarWebAPI.Controllers
     /// <summary>
     /// 工厂控制器
     /// </summary>
+    [Authorize]
     [ApiController]
     [Route("[controller]/[action]")]
     public class FactoryController : BaseController

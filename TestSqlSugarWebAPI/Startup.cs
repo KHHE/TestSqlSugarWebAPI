@@ -9,6 +9,7 @@ using Entity;
 using System;
 using Utils;
 using TestSqlSugarWebAPI.Filter;
+using TestSqlSugarWebAPI.AuthorizeHandler;
 
 namespace TestSqlSugarWebAPI
 {
@@ -34,6 +35,15 @@ namespace TestSqlSugarWebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestSqlSugarWebAPI", Version = "v1", Description = "实现工厂接口" });
                 c.IncludeXmlComments("TestSqlSugarWebAPI.xml", true);
+            });
+
+            //添加认证处理器
+            services.AddAuthentication(options =>  
+            {
+                //options.DefaultScheme = DefaultAuthHandler.SchemeName;//不要指定默认授权方案，否则所有请求都会进行验证
+                options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SchemeName, "DEFAULT_SCHEME");
+                options.DefaultAuthenticateScheme = ApiAuthorizeHandler.SchemeName;
+                options.DefaultChallengeScheme = ApiAuthorizeHandler.SchemeName;
             });
 
             //添加数据库SqlSugar
@@ -81,7 +91,8 @@ namespace TestSqlSugarWebAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();    //认证
+            app.UseAuthorization();     //授权
 
             app.UseEndpoints(endpoints =>
             {
