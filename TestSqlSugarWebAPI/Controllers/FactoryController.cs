@@ -2,6 +2,7 @@
 using Entity;
 using Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SqlSugar;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace TestSqlSugarWebAPI.Controllers
     {
         
         private readonly IFactoryLogic factoryLogic;
+
         /// <summary>
         /// 构造函数注入服务
         /// </summary>
@@ -33,7 +35,7 @@ namespace TestSqlSugarWebAPI.Controllers
         [HttpGet]
         public async Task<Factory> GetEntity(int id)
         {
-            return await factoryLogic.GetEntity(id);
+            return await factoryLogic.GetByIdAsync(id);
         }
 
         /// <summary>
@@ -41,9 +43,9 @@ namespace TestSqlSugarWebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<int> SaveEntity(Factory entity)
+        public async Task<bool> SaveEntity(Factory entity)
         {
-            return await factoryLogic.SaveEntity(entity);
+            return await factoryLogic.InsertAsync(entity);
         }
 
         /// <summary>
@@ -51,9 +53,9 @@ namespace TestSqlSugarWebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<int> DeleteEntity(int id)
+        public async Task<bool> DeleteEntity(int id)
         {
-            return await factoryLogic.DeleteEntity(id);
+            return await factoryLogic.DeleteByIdAsync(id);
         }
 
         /// <summary>
@@ -61,9 +63,9 @@ namespace TestSqlSugarWebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<int> UpdateEntity(Factory entity)
+        public async Task<bool> UpdateEntity(Factory entity)
         {
-            return await factoryLogic.UpdateEntity(entity);
+            return await factoryLogic.UpdateAsync(entity);
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace TestSqlSugarWebAPI.Controllers
         {
             var expression = LinqExtensions.True<Factory>();
             expression = expression.And(x => x.Name.Contains(dto.Name));
-            return await factoryLogic.GetList(expression);
+            return await factoryLogic.GetListAsync(expression);
         }
 
         /// <summary>
@@ -87,8 +89,7 @@ namespace TestSqlSugarWebAPI.Controllers
         {
             var expression = LinqExtensions.True<Factory>();
             expression = expression.And(x => x.Name.Contains(dto.Name));
-            expression = expression.Or(x => x.Addr.Contains(dto.Addr));
-            return await factoryLogic.GetPageList(expression, pageIndex, pageSize);
+            return await factoryLogic.GetPageListAsync(expression, pageIndex, pageSize);
         }
     }
 }

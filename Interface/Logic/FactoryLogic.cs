@@ -1,49 +1,55 @@
-﻿using Service;
-using SqlSugar;
+﻿using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Entity;
+using Dal;
 
 namespace Interface
 {
     public class FactoryLogic : IFactoryLogic
     {
-        private readonly BaseRepository baseRepo;
+        private readonly BaseRepository<Factory> baseRepo;
+
+        /// <summary>
+        /// 构造函数IOC注入ISqlSugarClient数据库服务
+        /// </summary>
+        /// <param name="sqlSugarClient"></param>
         public FactoryLogic(ISqlSugarClient sqlSugarClient)
         {
-            baseRepo = new BaseRepository(sqlSugarClient);
+            baseRepo = new BaseRepository<Factory>(sqlSugarClient);
         }
 
-        public ValueTask<int> SaveEntity(Factory entity)
+        public async Task<bool> InsertAsync(Factory entity)
         {
-            return baseRepo.SaveEntity<Factory>(entity);
+            return await baseRepo.InsertAsync(entity);
         }
 
-        public ValueTask<int> UpdateEntity(Factory entity)
+        public async Task<bool> UpdateAsync(Factory entity)
         {
-            return baseRepo.UpdateEntity<Factory>(entity);
+            throw new System.Exception("更新异常了");
+            return await baseRepo.UpdateAsync(entity);
         }
 
-        public ValueTask<int> DeleteEntity(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
-            return baseRepo.DeleteEntity<Factory>(id);
+            return await baseRepo.DeleteByIdAsync(id);
         }
 
-        public ValueTask<Factory> GetEntity(int id)
+        public async Task<Factory> GetByIdAsync(int id)
         {
-            return baseRepo.GetEntity<Factory>(id);
+            return await baseRepo.GetByIdAsync(id);
         }
 
-        public ValueTask<List<Factory>> GetList(Expression<Func<Factory, bool>> expression)
+        public async Task<List<Factory>> GetListAsync(Expression<Func<Factory, bool>> expression)
         {
-            return baseRepo.GetList(expression);
+            return await baseRepo.GetListAsync(expression);
         }
 
-        public ValueTask<List<Factory>> GetPageList(Expression<Func<Factory, bool>> expression, int pageIndex, int pageSize)
+        public async Task<List<Factory>> GetPageListAsync(Expression<Func<Factory, bool>> expression, int pageIndex, int pageSize)
         {
-            return baseRepo.GetPageList(expression, pageIndex, pageSize);
+            return await baseRepo.GetPageListAsync(expression, new PageModel { PageIndex = pageIndex, PageSize = pageSize});
         }
     }
 }

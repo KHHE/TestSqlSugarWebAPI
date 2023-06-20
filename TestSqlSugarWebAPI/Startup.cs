@@ -1,18 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Entity;
+using System;
+using Utils;
+using TestSqlSugarWebAPI.Filter;
 
 namespace TestSqlSugarWebAPI
 {
@@ -28,14 +24,19 @@ namespace TestSqlSugarWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //添加全局异常处理类
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<GlobalExceptionFilter>();
+            });
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestSqlSugarWebAPI", Version = "v1", Description = "实现工厂接口" });
                 c.IncludeXmlComments("TestSqlSugarWebAPI.xml", true);
             });
 
+            //添加数据库SqlSugar
             services.AddSingleton<ISqlSugarClient>(s =>
             {
                 SqlSugarScope sqlSugar = new SqlSugarScope(new ConnectionConfig()
@@ -50,17 +51,19 @@ namespace TestSqlSugarWebAPI
                    //单例参数配置，所有上下文生效
                    db.Aop.OnLogExecuting = (sql, pars) =>
                                {
-                       //获取IOC对象不要求在一个上下文
-                       //vra log=s.GetService<Log>()
+                                   Console.WriteLine(UtilMethods.GetNativeSql(sql, pars));
+                                   //获取IOC对象不要求在一个上下文
+                                   //vra log=s.GetService<Log>()
 
-                       //获取IOC对象要求在一个上下文
-                       //var appServive = s.GetService<IHttpContextAccessor>();
-                       //var log= appServive?.HttpContext?.RequestServices.GetService<Log>();
-                   };
+                                   //获取IOC对象要求在一个上下文
+                                   //var appServive = s.GetService<IHttpContextAccessor>();
+                                   //var log= appServive?.HttpContext?.RequestServices.GetService<Log>();
+                               };
                });
-                
+
                 return sqlSugar;
             });
+
         }
         
 

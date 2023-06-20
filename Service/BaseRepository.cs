@@ -1,99 +1,68 @@
 ﻿using SqlSugar;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Entity;
 
-namespace Service
+namespace Dal
 {
-    public class BaseRepository
+    public class BaseRepository<T>: SimpleClient<T> where T : class, new()
     {
-        private readonly ISqlSugarClient db;
-        public BaseRepository(ISqlSugarClient sqlSugarClient)
+        public BaseRepository(ISqlSugarClient db)
         {
-            db = sqlSugarClient;
+            base.Context = db;
         }
 
         /// <summary>
-        /// 主库链接
+        /// 扩展方法，仅查询sql返回List<T>，不分页
         /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
         /// <returns></returns>
-        //public SqlSugarClient GetInstance()
-        //{
-        //    SqlSugarClient db = null;
-        //    db = new SqlSugarClient(new SqlSugar.ConnectionConfig()
-        //    {
-        //        DbType = SqlSugar.DbType.Sqlite,
-        //            ConnectionString = "Data Source=BIELITHZ356;Database=Test;Uid=sa;Pwd=6MonkeysRLooking^;Enlist=true;Pooling=true;Connect TimeOut=3000;",
-        //            IsAutoCloseConnection = true,
-        //    });
-        //    db.Ado.IsEnableLogEvent = true;
-        //    return db;
-        //}
-
-        /// <summary>
-        /// 通过Id获取实体
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public async ValueTask<T> GetEntity<T>(int id) where T : BaseEntity, new()
+        public async Task<List<T>> SqlQueryable(string sql)
         {
-            return await db.Queryable<T>().InSingleAsync(id);
+            return await base.Context.SqlQueryable<T>(sql).ToListAsync();
         }
 
         /// <summary>
-        /// 新增实体
+        /// 扩展方法，仅查询sql返回List<T>，带sql参数，不分页
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="sql"></param>
+        /// <param name="parameters">如果多个参数 new { id=1 , name="xx"} 用逗号隔开</param>
         /// <returns></returns>
-        public async ValueTask<int> SaveEntity<T>(object entity) where T : BaseEntity, new()
+        public async Task<List<T>> SqlQueryable(string sql, object parameters)
         {
-            return await db.Insertable<T>(entity).ExecuteCommandAsync();
+            return await base.Context.SqlQueryable<T>(sql).AddParameters(parameters).ToListAsync();
         }
 
         /// <summary>
-        /// 修改实体
+        /// 扩展方法，仅查询sql返回List<T>，sql内不要写分页，不带sql参数，自动分页
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="sql"></param>
         /// <returns></returns>
-        public async ValueTask<int> UpdateEntity<T>(object entity) where T : BaseEntity, new()
+        public async Task<List<T>> SqlQueryablePage(string sql, int pageIndex, int pageSize)
         {
-            return await db.Updateable<T>(entity).CallEntityMethod(x => x.Modify()).ExecuteCommandAsync();
+            return await base.Context.SqlQueryable<T>(sql).ToPageListAsync(pageIndex, pageSize);
         }
 
         /// <summary>
-        /// 删除数据
+        /// 扩展方法，仅查询sql返回List<T>，sql内不要写分页，带sql参数，自动分页
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="sql"></param>
+        /// <param name="parameters">如果多个参数 new { id=1 , name="xx"} 用逗号隔开</param>
         /// <returns></returns>
-        public async ValueTask<int> DeleteEntity<T>(int id) where T : BaseEntity, new()
+        public async Task<List<T>> SqlQueryablePage(string sql, object parameters, int pageIndex, int pageSize)
         {
-            return await db.Deleteable<T>().In(id).ExecuteCommandAsync();
+            return await base.Context.SqlQueryable<T>(sql).AddParameters(parameters).ToPageListAsync(pageIndex, pageSize);
         }
 
         /// <summary>
-        /// 获取List数据
+        /// 扩展方法，仅执行更新、删除sql语句，返回是否执行成功
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="expression"></param>
+        /// <param name="sql">Sql语句</param>
+        /// <param name="parameters">如果多个参数 new { id=1 , name="xx"} 用逗号隔开</param>
         /// <returns></returns>
-        public async ValueTask<List<T>> GetList<T>(Expression<Func<T, bool>> expression) where T : BaseEntity, new()
+        public async Task<bool> ExecuteCommandAsync(string sql, object parameters)
         {
-            return await db.Queryable<T>().Where(expression).ToListAsync();
-        }
-
-        /// <summary>
-        /// 获取分页数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="expression"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public async ValueTask<List<T>> GetPageList<T>(Expression<Func<T, bool>> expression, int pageIndex, int pageSize) where T : BaseEntity, new()
-        {
-            return await db.Queryable<T>().Where(expression).ToPageListAsync(pageIndex, pageSize);
+            return await base.Context.Ado.ExecuteCommandAsync(sql, parameters) > 0;
         }
     }
 }

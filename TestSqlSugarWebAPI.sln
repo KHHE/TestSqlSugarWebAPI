@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "Interface\Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "Service\Dal.csproj", "{436658B3-4AB7-4437-9606-4995F740DED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoudleCreateCode", "MoudleCreateCode\MoudleCreateCode.csproj", "{7864D5A4-1196-4A27-9870-9EE62E8E67A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoudleCreateCode", "MoudleCreateCode\MoudleCreateCode.csproj", "{7864D5A4-1196-4A27-9870-9EE62E8E67A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{14FC58ED-F052-420C-960E-D8F3807098B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7864D5A4-1196-4A27-9870-9EE62E8E67A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14FC58ED-F052-420C-960E-D8F3807098B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14FC58ED-F052-420C-960E-D8F3807098B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14FC58ED-F052-420C-960E-D8F3807098B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14FC58ED-F052-420C-960E-D8F3807098B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

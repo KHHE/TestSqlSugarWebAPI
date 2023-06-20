@@ -11,7 +11,7 @@
         </member>
         <member name="M:TestSqlSugarWebAPI.Controllers.BaseController.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
             <summary>
-            接口执行前执行
+            接口执行前执行拦截功能，如记录日志、判断权限等
             </summary>
             <param name="context"></param>
             <param name="next"></param>
@@ -75,7 +75,7 @@
             工厂控制器
             </summary>
         </member>
-        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.#ctor(SqlSugar.ISqlSugarClient,Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.#ctor(SqlSugar.ISqlSugarClient)">
             <summary>
             构造函数注入服务
             </summary>
@@ -87,10 +87,22 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.GetSection">
+        <member name="T:TestSqlSugarWebAPI.Filter.GlobalExceptionFilter">
             <summary>
-            实现获取功能
+            全局异常过滤器
             </summary>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Filter.GlobalExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            执行异常时设置结果 同步方式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.Filter.GlobalExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary> 
+            执行异常时设置结果 异步方式
+            </summary>
+            <param name="context"></param>
             <returns></returns>
         </member>
         <member name="M:TestSqlSugarWebAPI.Startup.CreateCodeFirstTable(SqlSugar.SqlSugarClient)">

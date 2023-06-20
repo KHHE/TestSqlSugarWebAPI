@@ -8,50 +8,16 @@ namespace Interface
 {
     public interface IBaseLogic<T> where T: BaseEntity, new()
     {
-        /// <summary>
-        /// 通过Id获取实体
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        ValueTask<T> GetEntity(int id);
+        Task<bool> InsertAsync(Factory entity);
 
-        /// <summary>
-        /// 新增实体
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        ValueTask<int> SaveEntity(T entity);
+        Task<bool> UpdateAsync(Factory entity);
 
-        /// <summary>
-        /// 修改实体
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        ValueTask<int> UpdateEntity(T entity);
+        Task<bool> DeleteByIdAsync(int id);
 
-        /// <summary>
-        /// 删除数据
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        ValueTask<int> DeleteEntity(int id);
+        Task<Factory> GetByIdAsync(int id);
 
-        /// <summary>
-        /// 获取List数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        ValueTask<List<T>> GetList(Expression<Func<T, bool>> expression);
+        Task<List<Factory>> GetListAsync(Expression<Func<Factory, bool>> expression);
 
-        /// <summary>
-        /// 获取分页数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="expression"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        ValueTask<List<T>> GetPageList(Expression<Func<T, bool>> expression, int pageIndex, int pageSize);
+        Task<List<Factory>> GetPageListAsync(Expression<Func<Factory, bool>> expression, int pageIndex, int pageSize);
     }
 }
