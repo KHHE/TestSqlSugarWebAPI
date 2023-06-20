@@ -7,7 +7,6 @@ using Microsoft.OpenApi.Models;
 using SqlSugar;
 using Entity;
 using System;
-using Utils;
 using TestSqlSugarWebAPI.Filter;
 using TestSqlSugarWebAPI.AuthorizeHandler;
 
@@ -41,9 +40,9 @@ namespace TestSqlSugarWebAPI
             services.AddAuthentication(options =>  
             {
                 //options.DefaultScheme = DefaultAuthHandler.SchemeName;//不要指定默认授权方案，否则所有请求都会进行验证
-                options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SchemeName, "DEFAULT_SCHEME");
-                options.DefaultAuthenticateScheme = ApiAuthorizeHandler.SchemeName;
-                options.DefaultChallengeScheme = ApiAuthorizeHandler.SchemeName;
+                options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SCHEME_NAME, "DEFAULT_SCHEME");
+                options.DefaultAuthenticateScheme = ApiAuthorizeHandler.SCHEME_NAME;
+                options.DefaultChallengeScheme = ApiAuthorizeHandler.SCHEME_NAME;
             });
 
             //添加数据库SqlSugar
@@ -84,7 +83,10 @@ namespace TestSqlSugarWebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSqlSugarWebAPI v1"));
+                app.UseSwaggerUI(c => {
+                    c.UseRequestInterceptor($@"(req) => {{ req.headers['swagger']='{ApiAuthorizeHandler.AUTH_KEY}';return req;}}");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSqlSugarWebAPI v1");
+                });
             }
 
             app.UseHttpsRedirection();
