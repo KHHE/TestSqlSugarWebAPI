@@ -38,9 +38,9 @@ namespace Dal
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public async Task<List<T>> SqlQueryablePage(string sql, int pageIndex, int pageSize)
+        public async Task<List<T>> SqlQueryablePage(string sql, int pageIndex, int pageSize, RefAsync<int> totalNumber)
         {
-            return await base.Context.SqlQueryable<T>(sql).ToPageListAsync(pageIndex, pageSize);
+            return await base.Context.SqlQueryable<T>(sql).ToPageListAsync(pageIndex, pageSize, totalNumber);
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace Dal
         /// <param name="sql"></param>
         /// <param name="parameters">如果多个参数 new { id=1 , name="xx"} 用逗号隔开</param>
         /// <returns></returns>
-        public async Task<List<T>> SqlQueryablePage(string sql, object parameters, int pageIndex, int pageSize)
+        public async Task<List<T>> SqlQueryablePage(string sql, object parameters, int pageIndex, int pageSize, RefAsync<int> totalNumber)
         {
-            return await base.Context.SqlQueryable<T>(sql).AddParameters(parameters).ToPageListAsync(pageIndex, pageSize);
+            return await base.Context.SqlQueryable<T>(sql).AddParameters(parameters).ToPageListAsync(pageIndex, pageSize, totalNumber);
         }
 
         /// <summary>

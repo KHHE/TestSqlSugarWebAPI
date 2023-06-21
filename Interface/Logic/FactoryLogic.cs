@@ -28,7 +28,6 @@ namespace Interface
 
         public async Task<bool> UpdateAsync(Factory entity)
         {
-            throw new System.Exception("更新异常了");
             return await baseRepo.UpdateAsync(entity);
         }
 

@@ -40,7 +40,7 @@ namespace TestSqlSugarWebAPI
             services.AddAuthentication(options =>  
             {
                 options.DefaultScheme = ApiAuthorizeHandler.SCHEME_NAME;//指定默认授权方案，所有请求都会进行验证
-                options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SCHEME_NAME, "DEFAULT_SCHEME");
+                options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SCHEME_NAME, ApiAuthorizeHandler.SCHEME_NAME);
                 //options.DefaultAuthenticateScheme = ApiAuthorizeHandler.SCHEME_NAME;
                 //options.DefaultChallengeScheme = ApiAuthorizeHandler.SCHEME_NAME;
             });
@@ -57,17 +57,6 @@ namespace TestSqlSugarWebAPI
                db =>
                {
                    CreateCodeFirstTable(db);
-                   //单例参数配置，所有上下文生效
-                   db.Aop.OnLogExecuting = (sql, pars) =>
-                               {
-                                   Console.WriteLine(UtilMethods.GetNativeSql(sql, pars));
-                                   //获取IOC对象不要求在一个上下文
-                                   //vra log=s.GetService<Log>()
-
-                                   //获取IOC对象要求在一个上下文
-                                   //var appServive = s.GetService<IHttpContextAccessor>();
-                                   //var log= appServive?.HttpContext?.RequestServices.GetService<Log>();
-                               };
                });
 
                 return sqlSugar;
@@ -84,8 +73,8 @@ namespace TestSqlSugarWebAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => {
-                    //添加WebApi访问密钥，不携带密钥无法访问成功，请求头添加：swagger字段，密钥：定义的AUTH_KEY
-                    c.UseRequestInterceptor($@"(req) => {{ req.headers['swagger']='{ApiAuthorizeHandler.AUTH_KEY}';return req;}}");
+                    //添加WebApi访问密钥，不携带密钥无法访问成功，请求头添加：定义的AUTH_KEY，密钥：定义的AUTH_KEY
+                    c.UseRequestInterceptor($@"(req) => {{ req.headers['{ApiAuthorizeHandler.AUTH_KEY}']='{ApiAuthorizeHandler.AUTH_PWD}';return req;}}");
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSqlSugarWebAPI v1");
                 });
             }

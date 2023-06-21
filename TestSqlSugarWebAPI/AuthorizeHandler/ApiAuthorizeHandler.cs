@@ -19,26 +19,47 @@ namespace TestSqlSugarWebAPI.AuthorizeHandler
         public const string SCHEME_NAME = "DEFAULT_SCHEME";
 
         /// <summary>
-        /// 身份认证密钥
+        /// 身份认证密钥Key
         /// </summary>
-        public const string AUTH_KEY = "AUTH_KEY_C2118DD4-28CD-4E0B-A4B2-B58DFCAC3B6F";
+        public const string AUTH_KEY = "SECRET";
 
+        /// <summary>
+        /// 身份认证密钥密码
+        /// </summary>
+        public const string AUTH_PWD = "AUTH_PWD_28CD-4E0B-A4B2-B58DFCAC3B6F";
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="logger"></param>
+        /// <param name="encoder"></param>
+        /// <param name="clock"></param>
         public ApiAuthorizeHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
            : base(options, logger, encoder, clock)
         {
         }
 
+        /// <summary>
+        /// 访问认证、授权逻辑
+        /// </summary>
+        /// <returns></returns>
         protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var authKey = Request.Headers["swagger"];
-            if (AUTH_KEY != authKey) //验证授权Key错误
+            if (AUTH_PWD != Request.Headers[AUTH_KEY]) //验证授权密码错误
             {
-                await Context.Response.WriteAsJsonAsync(new { Code = 401, Message = "身份验证不通过", Result = string.Empty });
+                await Context.Response.WriteAsJsonAsync(new { Code = 401, Message = "身份验证失败", Result = string.Empty });
                 return AuthenticateResult.NoResult();
             }
             return AuthenticateResult.Success(GetAuthTicket("admin", "admin"));
         }
 
+        /// <summary>
+        /// 获取成功后的用户授权
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         private AuthenticationTicket GetAuthTicket(string name, string role)
         {
             var claimsIdentity = new ClaimsIdentity(new Claim[]

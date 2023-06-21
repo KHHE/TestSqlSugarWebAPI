@@ -16,8 +16,36 @@
         </member>
         <member name="F:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.AUTH_KEY">
             <summary>
-            身份认证密钥
+            身份认证密钥Key
             </summary>
+        </member>
+        <member name="F:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.AUTH_PWD">
+            <summary>
+            身份认证密钥密码
+            </summary>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="options"></param>
+            <param name="logger"></param>
+            <param name="encoder"></param>
+            <param name="clock"></param>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.HandleAuthenticateAsync">
+            <summary>
+            访问认证、授权逻辑
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestSqlSugarWebAPI.AuthorizeHandler.ApiAuthorizeHandler.GetAuthTicket(System.String,System.String)">
+            <summary>
+            获取成功后的用户授权
+            </summary>
+            <param name="name"></param>
+            <param name="role"></param>
+            <returns></returns>
         </member>
         <member name="T:TestSqlSugarWebAPI.Controllers.BaseController">
             <summary>

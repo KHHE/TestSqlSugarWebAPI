@@ -12,7 +12,7 @@ namespace TestSqlSugarWebAPI.Controllers
     /// <summary>
     /// 工厂控制器
     /// </summary>
-    [Authorize]
+    [Authorize] //需要授权密钥才能访问接口，逻辑：ApiAuthorizeHandler
     [ApiController]
     [Route("[controller]/[action]")]
     public class FactoryController : BaseController
