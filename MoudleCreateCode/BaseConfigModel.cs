@@ -14,7 +14,7 @@ namespace MoudleCreateCode
         public string TableNameUpper { get; set; }
         public FileConfigModel FileConfig { get; set; }
         public OutputConfigModel OutputConfig { get; set; }
-        
+
     }
 
     public class FileConfigModel

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    public class BaseRepository<T>: SimpleClient<T> where T : class, new()
+    public class BaseRepository<T> : SimpleClient<T> where T : class, new()
     {
         public BaseRepository(ISqlSugarClient db)
         {

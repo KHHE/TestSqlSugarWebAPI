@@ -1,12 +1,7 @@
-﻿using Dal;
-using Entity;
-using Interface;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
 using MoudleCreateCode;
 using SqlSugar;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Threading.Tasks;
 
 namespace TestSqlSugarWebAPI.Controllers
@@ -18,7 +13,7 @@ namespace TestSqlSugarWebAPI.Controllers
     [Route("[controller]/[action]")]
     public class ToolController : BaseController
     {
-        
+
         private readonly SingleTableTemplate singleTableTemplate;
         /// <summary>
         /// 构造函数注入服务
@@ -39,6 +34,6 @@ namespace TestSqlSugarWebAPI.Controllers
             return await singleTableTemplate.GetTableFieldList(tableName);
         }
 
-       
+
     }
 }

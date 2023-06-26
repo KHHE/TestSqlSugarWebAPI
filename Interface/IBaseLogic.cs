@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    public interface IBaseLogic<T> where T: BaseEntity, new()
+    public interface IBaseLogic<T> where T : BaseEntity, new()
     {
         Task<bool> InsertAsync(Factory entity);
 

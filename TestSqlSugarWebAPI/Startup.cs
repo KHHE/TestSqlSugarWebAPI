@@ -1,3 +1,4 @@
+using Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,10 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SqlSugar;
-using Entity;
-using System;
-using TestSqlSugarWebAPI.Filter;
 using TestSqlSugarWebAPI.AuthorizeHandler;
+using TestSqlSugarWebAPI.Filter;
 
 namespace TestSqlSugarWebAPI
 {
@@ -37,7 +36,7 @@ namespace TestSqlSugarWebAPI
             });
 
             //添加WebApi访问认证处理控制中心
-            services.AddAuthentication(options =>  
+            services.AddAuthentication(options =>
             {
                 options.DefaultScheme = ApiAuthorizeHandler.SCHEME_NAME;//指定默认授权方案，所有请求都会进行验证
                 options.AddScheme<ApiAuthorizeHandler>(ApiAuthorizeHandler.SCHEME_NAME, ApiAuthorizeHandler.SCHEME_NAME);
@@ -63,7 +62,7 @@ namespace TestSqlSugarWebAPI
             });
 
         }
-        
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -72,7 +71,8 @@ namespace TestSqlSugarWebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {
+                app.UseSwaggerUI(c =>
+                {
                     //添加WebApi访问密钥，不携带密钥无法访问成功，请求头添加：定义的AUTH_KEY，密钥：定义的AUTH_KEY
                     c.UseRequestInterceptor($@"(req) => {{ req.headers['{ApiAuthorizeHandler.AUTH_KEY}']='{ApiAuthorizeHandler.AUTH_PWD}';return req;}}");
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSqlSugarWebAPI v1");
@@ -91,7 +91,6 @@ namespace TestSqlSugarWebAPI
                 endpoints.MapControllers();
             });
         }
-
 
         /// <summary>
         /// 自动根据实体类创建表

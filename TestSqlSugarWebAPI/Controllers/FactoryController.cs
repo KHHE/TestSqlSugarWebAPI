@@ -17,7 +17,7 @@ namespace TestSqlSugarWebAPI.Controllers
     [Route("[controller]/[action]")]
     public class FactoryController : BaseController
     {
-        
+
         private readonly IFactoryLogic factoryLogic;
 
         /// <summary>

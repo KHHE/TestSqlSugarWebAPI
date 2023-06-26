@@ -22,7 +22,7 @@ namespace Entity
 
         public void Modify()
         {
-            this.UpdateTime = DateTime.Now;
+            UpdateTime = DateTime.Now;
         }
     }
 }

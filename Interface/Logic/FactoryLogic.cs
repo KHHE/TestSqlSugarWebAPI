@@ -1,10 +1,10 @@
-﻿using SqlSugar;
+﻿using Dal;
+using Entity;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Entity;
-using Dal;
 
 namespace Interface
 {
@@ -48,7 +48,7 @@ namespace Interface
 
         public async Task<List<Factory>> GetPageListAsync(Expression<Func<Factory, bool>> expression, int pageIndex, int pageSize)
         {
-            return await baseRepo.GetPageListAsync(expression, new PageModel { PageIndex = pageIndex, PageSize = pageSize});
+            return await baseRepo.GetPageListAsync(expression, new PageModel { PageIndex = pageIndex, PageSize = pageSize });
         }
     }
 }

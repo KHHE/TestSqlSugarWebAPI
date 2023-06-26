@@ -19,7 +19,7 @@ namespace TestSqlSugarWebAPI.Controllers
         {
             #region 异常获取
             var resultContext = await next();
-            
+
             var controllerName = context.RouteData.Values["controller"].ToString();
             string action = context.RouteData.Values["Action"].ToString();
             if (resultContext.Exception != null) //报异常了

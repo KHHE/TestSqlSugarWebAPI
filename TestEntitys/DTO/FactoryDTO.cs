@@ -1,12 +1,9 @@
-﻿using SqlSugar;
-using System;
-
-namespace Entity
+﻿namespace Entity
 {
     /// <summary>
     /// 工厂DTO查询
     /// </summary>
-    public class FactoryDTO: BaseDTO
+    public class FactoryDTO : BaseDTO
     {
         public string Name { get; set; }
 
