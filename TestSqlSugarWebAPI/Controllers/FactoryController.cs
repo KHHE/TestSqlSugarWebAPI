@@ -34,9 +34,9 @@ namespace TestSqlSugarWebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<Factory> GetEntity(int id)
+        public async Task<IActionResult> GetEntity(int id)
         {
-            return await factoryLogic.GetByIdAsync(id);
+            return Json(await factoryLogic.GetByIdAsync(id));
         }
 
         /// <summary>

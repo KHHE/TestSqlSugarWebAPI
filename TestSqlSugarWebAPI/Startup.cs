@@ -50,8 +50,8 @@ namespace TestSqlSugarWebAPI
             {
                 SqlSugarScope sqlSugar = new SqlSugarScope(new ConnectionConfig()
                 {
-                    DbType = SqlSugar.DbType.SqlServer,
-                    ConnectionString = "Data Source=BIELITHZ356;Database=Test;Uid=sa;Pwd=6MonkeysRLooking^;Enlist=true;Pooling=true;Connect TimeOut=3000;",
+                    DbType = DbType.SqlServer,
+                    ConnectionString = Configuration.GetConnectionString("DebugSqlConnection"),
                     IsAutoCloseConnection = true,
                 },
                db =>

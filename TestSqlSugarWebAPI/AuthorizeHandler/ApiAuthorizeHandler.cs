@@ -48,7 +48,8 @@ namespace TestSqlSugarWebAPI.AuthorizeHandler
         {
             if (AUTH_PWD != Request.Headers[AUTH_KEY]) //验证授权密码错误
             {
-                await Context.Response.WriteAsJsonAsync(new { Code = 401, Message = "身份验证失败", Result = string.Empty });
+                Context.Response.StatusCode = 401;
+                await Context.Response.WriteAsync("身份验证失败");
                 return AuthenticateResult.NoResult();
             }
             return AuthenticateResult.Success(GetAuthTicket("admin", "admin"));
