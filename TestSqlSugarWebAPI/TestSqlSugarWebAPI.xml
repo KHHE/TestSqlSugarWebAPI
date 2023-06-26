@@ -47,12 +47,12 @@
             <param name="role"></param>
             <returns></returns>
         </member>
-        <member name="T:TestSqlSugarWebAPI.Controllers.BaseController">
+        <member name="T:TestSqlSugarWebAPI.Controllers.BaseController`1">
             <summary>
             控制器访问拦截器
             </summary>
         </member>
-        <member name="M:TestSqlSugarWebAPI.Controllers.BaseController.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+        <member name="M:TestSqlSugarWebAPI.Controllers.BaseController`1.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
             <summary>
             接口执行前执行拦截功能，如记录日志、判断权限等
             </summary>
@@ -60,7 +60,7 @@
             <param name="next"></param>
             <returns></returns>
         </member>
-        <member name="M:TestSqlSugarWebAPI.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+        <member name="M:TestSqlSugarWebAPI.Controllers.BaseController`1.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
             接口执行后执行
             </summary>
@@ -71,11 +71,12 @@
             工厂控制器
             </summary>
         </member>
-        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.#ctor(SqlSugar.ISqlSugarClient)">
+        <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.#ctor(SqlSugar.ISqlSugarClient,Microsoft.Extensions.Logging.ILogger{TestSqlSugarWebAPI.Controllers.FactoryController})">
             <summary>
             构造函数注入服务
             </summary>
             <param name="sqlSugarClient"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:TestSqlSugarWebAPI.Controllers.FactoryController.GetEntity(System.Int32)">
             <summary>
@@ -118,11 +119,12 @@
             工厂控制器
             </summary>
         </member>
-        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.#ctor(SqlSugar.ISqlSugarClient)">
+        <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.#ctor(SqlSugar.ISqlSugarClient,Microsoft.Extensions.Logging.ILogger{TestSqlSugarWebAPI.Controllers.ToolController})">
             <summary>
             构造函数注入服务
             </summary>
             <param name="sqlSugarClient"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:TestSqlSugarWebAPI.Controllers.ToolController.GetTableFieldList(System.String)">
             <summary>

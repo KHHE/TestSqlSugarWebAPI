@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MoudleCreateCode;
 using SqlSugar;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace TestSqlSugarWebAPI.Controllers
         /// 构造函数注入服务
         /// </summary>
         /// <param name="sqlSugarClient"></param>
-        public ToolController(ISqlSugarClient sqlSugarClient)
+        /// <param name="logger"></param>
+        public ToolController(ISqlSugarClient sqlSugarClient, ILogger<ToolController> logger):base(logger)
         {
             singleTableTemplate = new SingleTableTemplate(sqlSugarClient);
         }

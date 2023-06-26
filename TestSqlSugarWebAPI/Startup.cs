@@ -90,6 +90,7 @@ namespace TestSqlSugarWebAPI
             {
                 endpoints.MapControllers();
             });
+
         }
 
         /// <summary>

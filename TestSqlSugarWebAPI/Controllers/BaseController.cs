@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
+using SqlSugar;
 using System.Threading.Tasks;
+using TestSqlSugarWebAPI.Filter;
+using Utils;
 
 namespace TestSqlSugarWebAPI.Controllers
 {
@@ -9,6 +13,13 @@ namespace TestSqlSugarWebAPI.Controllers
     /// </summary>
     public class BaseController : Controller
     {
+        protected readonly ILogger _logger = null;
+
+        public BaseController(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// 接口执行前执行拦截功能，如记录日志、判断权限等
         /// </summary>
@@ -19,22 +30,20 @@ namespace TestSqlSugarWebAPI.Controllers
         {
             #region 异常获取
             var resultContext = await next();
-
             var controllerName = context.RouteData.Values["controller"].ToString();
             string action = context.RouteData.Values["Action"].ToString();
             if (resultContext.Exception != null) //报异常了
             {
-                //记录异常记录
-                //StringBuilder sbException = new StringBuilder();
-                //Exception exception = resultContext.Exception;
-                //sbException.AppendLine(exception.Message);
-                //while (exception.InnerException != null)
+                //TData obj = new TData();
+                ////obj.Message = resultContext.Exception.GetOriginalException().Message;
+                //if (string.IsNullOrEmpty(obj.Message))
                 //{
-                //    sbException.AppendLine(exception.InnerException.Message);
-                //    exception = exception.InnerException;
+                //    obj.Message = "抱歉，异常或网络异常，请重试！";
                 //}
-                //sbException.AppendLine(resultContext.Exception.StackTrace);
-                throw resultContext.Exception;
+                ////可定义权限控制过滤器，操作数据库记录访问日志
+                //resultContext.ExceptionHandled = true;      //标识异常已经处理，不报异常
+                //resultContext.Result = new JsonResult(obj); //设置接口异常后返回结果
+                //return;
             }
             #endregion
         }

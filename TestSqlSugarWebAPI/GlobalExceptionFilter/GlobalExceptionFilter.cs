@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Utils;
 
@@ -10,6 +11,7 @@ namespace TestSqlSugarWebAPI.Filter
     /// </summary> 
     public class GlobalExceptionFilter : IExceptionFilter, IAsyncExceptionFilter
     {
+       
         /// <summary>
         /// 执行异常时设置结果 同步方式
         /// </summary>
@@ -42,5 +44,10 @@ namespace TestSqlSugarWebAPI.Filter
     public class TData
     {
         public string Message { get; internal set; }
+    }
+
+    public class TData<T>: TData
+    {
+        public T data { get; set; }
     }
 }

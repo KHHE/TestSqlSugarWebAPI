@@ -3,7 +3,9 @@ using Entity;
 using Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,7 +26,8 @@ namespace TestSqlSugarWebAPI.Controllers
         /// 构造函数注入服务
         /// </summary>
         /// <param name="sqlSugarClient"></param>
-        public FactoryController(ISqlSugarClient sqlSugarClient)
+        /// <param name="logger"></param>
+        public FactoryController(ISqlSugarClient sqlSugarClient, ILogger<FactoryController> logger):base(logger)
         {
             factoryLogic = new FactoryLogic(sqlSugarClient);
         }
@@ -34,9 +37,10 @@ namespace TestSqlSugarWebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetEntity(int id)
+        public async Task<IActionResult> GetEntity(string id)
         {
-            return Json(await factoryLogic.GetByIdAsync(id));
+            _logger.LogInformation(string.Format("Get Entity id: {0}", id.ToString()));
+            return Json(await factoryLogic.GetByIdAsync(int.Parse(id)));
         }
 
         /// <summary>
